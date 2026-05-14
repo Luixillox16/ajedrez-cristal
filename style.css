@@ -841,10 +841,17 @@ li {
         order: 2;
     }
     
+    /* Ocultar el análisis durante el juego en móvil */
     .analysis-panel {
         width: 100%;
         max-width: none;
         order: 3;
+        display: none;
+    }
+    
+    /* Mostrar el análisis solo cuando la partida ha terminado en móvil */
+    .analysis-panel.show-on-mobile {
+        display: block;
     }
 }
 
