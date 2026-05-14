@@ -832,18 +832,27 @@ li {
     .board-wrapper {
         width: 100%;
         justify-content: center;
+        order: 1;
     }
     
-    .info-panel, .analysis-panel {
+    .info-panel {
         width: 100%;
         max-width: none;
+        order: 2;
+    }
+    
+    .analysis-panel {
+        width: 100%;
+        max-width: none;
+        order: 3;
     }
 }
 
 /* ========== RESPONSIVE - TELÉFONO PEQUEÑO (480px) ========== */
 @media (max-width: 480px) {
     body {
-        padding: 0;
+        padding: 3px;
+        min-height: 100vh;
     }
     
     .menu-card {
@@ -861,11 +870,27 @@ li {
     }
     
     .game-header {
-        margin-bottom: 10px;
+        margin-bottom: 8px;
+        padding: 0 3px;
     }
     
     .game-header h2 {
+        font-size: 0.9em;
+        flex: 1;
+    }
+    
+    .game-header-left {
+        flex: 1;
+    }
+    
+    .icon-btn {
+        width: 35px;
+        height: 35px;
         font-size: 1em;
+    }
+    
+    .resign-btn {
+        order: 3;
     }
     
     .turn-value {
@@ -882,5 +907,74 @@ li {
     
     .stat-number {
         font-size: 1.2em;
+    }
+    
+    .game-container {
+        gap: 8px;
+        padding: 0;
+    }
+    
+    .board-wrapper {
+        width: 100%;
+        padding: 0;
+        max-height: 100%;
+    }
+    
+    #board {
+        max-height: 60vh;
+        width: auto !important;
+    }
+    
+    .info-panel {
+        width: 100%;
+        padding: 12px;
+        max-width: none;
+    }
+    
+    .analysis-panel {
+        width: 100%;
+        padding: 12px;
+        max-width: none;
+    }
+    
+    .turn-box {
+        margin-bottom: 15px;
+        padding-bottom: 12px;
+    }
+    
+    .stats-box {
+        margin-bottom: 12px;
+    }
+    
+    .compact-btn {
+        padding: 7px;
+        margin: 4px 0;
+        font-size: 0.7em;
+    }
+    
+    .stats-grid {
+        margin-bottom: 12px;
+        gap: 3px;
+    }
+    
+    .stat-card {
+        padding: 6px;
+    }
+    
+    .move-list {
+        max-height: 120px;
+        padding: 6px;
+        margin-bottom: 8px;
+    }
+    
+    .analysis-title {
+        margin-bottom: 12px;
+        padding-bottom: 6px;
+        font-size: 0.75em;
+    }
+    
+    .export-btn {
+        padding: 7px;
+        font-size: 0.7em;
     }
 }
