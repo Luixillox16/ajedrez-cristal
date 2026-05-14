@@ -827,31 +827,39 @@ li {
     .game-container {
         flex-direction: column;
         align-items: stretch;
+        height: 100vh;
+        overflow: hidden;
     }
     
     .board-wrapper {
         width: 100%;
-        justify-content: center;
-        order: 1;
+        height: 100%;
+        max-height: none;
+        flex: 1;
+    }
+    
+    #board {
+        width: 100%;
+        height: 100%;
+        max-width: none !important;
+        max-height: none !important;
     }
     
     .info-panel {
-        width: 100%;
-        max-width: none;
-        order: 2;
-    }
-    
-    /* Ocultar el análisis durante el juego en móvil */
-    .analysis-panel {
-        width: 100%;
-        max-width: none;
-        order: 3;
         display: none;
     }
     
-    /* Mostrar el análisis solo cuando la partida ha terminado en móvil */
+    .analysis-panel {
+        display: none;
+    }
+    
+    /* Mostrar análisis solo cuando termina la partida */
     .analysis-panel.show-on-mobile {
         display: block;
+        width: 100%;
+        max-width: none;
+        order: 2;
+        flex: 0;
     }
 }
 
@@ -917,31 +925,34 @@ li {
     }
     
     .game-container {
-        gap: 8px;
+        gap: 0;
         padding: 0;
+        height: 100vh;
     }
     
     .board-wrapper {
         width: 100%;
         padding: 0;
-        max-height: 100%;
-    }
-    
-    #board {
-        max-height: 60vh;
-        width: auto !important;
+        flex: 1;
     }
     
     .info-panel {
-        width: 100%;
-        padding: 12px;
-        max-width: none;
+        display: none;
     }
     
     .analysis-panel {
+        display: none;
+    }
+    
+    /* Mostrar análisis solo cuando termina la partida */
+    .analysis-panel.show-on-mobile {
+        display: block;
         width: 100%;
         padding: 12px;
         max-width: none;
+        order: 2;
+        flex: 0;
+        overflow-y: auto;
     }
     
     .turn-box {
