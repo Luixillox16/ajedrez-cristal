@@ -117,6 +117,8 @@ $(document).ready(() => {
             gameOver = true;
             $('#status').text(`¡${winner} ganan por rendición!`);
             updateStats(winner === 'Blancas' ? 'loss' : 'win');
+            updateAnalysisPanel();
+            showAnalysisOnMobile();
             alert(`Te has rendido. ¡Ganan ${winner}!`);
         }
     });
@@ -208,7 +210,7 @@ function renderBoard() {
             
             html += `<td class="${extraClass}" data-square="${squareName}" style="background-color:${bgColor}; position:relative; text-align:center; vertical-align:middle;">
                         ${legalDot}
-                        <div class="piece ${pieceColor}" style="font-size:46px; display:flex; align-items:center; justify-content:center; width:100%; height:100%; text-shadow:2px 2px 4px rgba(0,0,0,0.3); cursor:pointer;">${pieceChar}</div>
+                        <div class="piece ${pieceColor}" style="font-size:46px; display:flex; align-items:center; justify-content:center; width:100%; height:100%; text-shadow:2px 2px 4px rgba(0,0,0,0.3);">${pieceChar}</div>
                       </td>`;
         }
         html += '</tr>';
@@ -261,6 +263,7 @@ function handleSquareClick(square) {
             $('#status').text(message);
             if (resultType) updateStats(resultType);
             updateAnalysisPanel();
+            showAnalysisOnMobile();
         } else if (isAIGame && game.turn() === 'b') {
             setTimeout(() => getAIMove(), 100);
         }
@@ -536,6 +539,21 @@ function updateAnalysisPanel() {
     $('#moveHistoryList').html(historyHtml.join(''));
 }
 
+// ============ MOSTRAR ANÁLISIS EN MÓVIL ============
+function showAnalysisOnMobile() {
+    // Solo en pantallas móviles (768px o menos)
+    if (window.innerWidth <= 768) {
+        $('.analysis-panel').addClass('show-on-mobile');
+    }
+}
+
+function hideAnalysisOnMobile() {
+    // Ocultar el análisis al iniciar una nueva partida
+    if (window.innerWidth <= 768) {
+        $('.analysis-panel').removeClass('show-on-mobile');
+    }
+}
+
 // ============ IA ============
 async function getAIMove() {
     if (!isAIGame) return;
@@ -634,6 +652,7 @@ function makeAIMove(move) {
             }
             $('#status').text(message);
             if (resultType) updateStats(resultType);
+            showAnalysisOnMobile();
         }
     }
 }
@@ -674,6 +693,7 @@ function resetGame() {
     renderBoard();
     updateUI();
     updateAnalysisPanel();
+    hideAnalysisOnMobile();
     $('#status').text('Jugando');
 }
 
