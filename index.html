@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Ajedrez Cristal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-board.css">
+    <link rel="icon" type="image/png" href="img/tablero.png">
+</head>
+<body>
+    <!-- Menú principal -->
+    <div id="mainMenu" class="menu-container active">
+        <div class="menu-card glass-effect">
+            <h1>♔ AJEDREZ CRISTAL ♚</h1>
+            <div class="menu-divider"></div>
+            
+            <div class="profile-circle" id="profileBtn">
+                <img src="img/perfil.png" alt="Perfil" id="profileAvatar">
+                <span id="profileName">Invitado</span>
+            </div>
+            
+            <div class="menu-buttons">
+                <button id="playVsAI" class="menu-btn btn-primary">🤖 VS IA ♞</button>
+                <button id="playVsPlayer" class="menu-btn btn-secondary">👥 1 VS 1 (Local) ♝</button>
+                <button id="playVsFriend" class="menu-btn btn-friend">👫 JUGAR CON AMIGO ♟</button>
+                <button id="lessonsBtn" class="menu-btn btn-lessons">📚 LECCIONES 🏆</button>
+                <button id="rulesMenuBtn" class="menu-btn btn-glass">📖 LIBRO DE REGLAS</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de perfil -->
+    <div id="profileModal" class="modal">
+        <div class="modal-content glass-effect">
+            <div class="modal-header">
+                <h3>Mi Perfil</h3>
+                <span class="close close-profile">&times;</span>
+            </div>
+            <div class="profile-header">
+                <img src="img/perfil.png" alt="Perfil">
+                <h3 id="profileModalName">Invitado</h3>
+            </div>
+            <div class="profile-stats">
+                <div class="stat-item"><div class="stat-number" id="gamesPlayed">0</div><div>Partidas</div></div>
+                <div class="stat-item"><div class="stat-number" id="wins">0</div><div>Victorias</div></div>
+                <div class="stat-item"><div class="stat-number" id="losses">0</div><div>Derrotas</div></div>
+                <div class="stat-item"><div class="stat-number" id="draws">0</div><div>Empates</div></div>
+            </div>
+            
+            <h4>🏆 Logros</h4>
+            <div id="achievementsList" class="achievements-list"></div>
+            
+            <h4>👥 Amigos</h4>
+            <div id="friendsList" class="friends-list"></div>
+            <div class="add-friend">
+                <input type="text" id="friendCode" placeholder="Código de amistad" class="friend-input">
+                <button id="addFriendBtn" class="compact-btn" style="width: auto;">➕</button>
+            </div>
+            <div class="my-code">
+                <p>Tu código: <strong id="myFriendCode">---</strong></p>
+                <button id="copyCodeBtn" class="compact-btn">📋 Copiar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de seleccionar amigo -->
+    <div id="friendSelectionModal" class="modal">
+        <div class="modal-content glass-effect">
+            <div class="modal-header">
+                <h3>👫 Selecciona un Amigo</h3>
+                <span class="close close-friend-selection">&times;</span>
+            </div>
+            <div id="friendsList2" class="friends-list-selection"></div>
+            <p id="noFriendsMsg" style="text-align:center; color:rgba(255,255,255,0.6); padding:20px;">No tienes amigos agregados</p>
+        </div>
+    </div>
+
+    <!-- Modal de dificultad -->
+    <div id="difficultyModal" class="modal">
+        <div class="modal-content glass-effect">
+            <h3 style="text-align: center;">🎮 Seleccionar Dificultad</h3>
+            <div class="difficulty-options" style="margin-top: 20px;">
+                <button class="difficulty-btn" data-diff="1">🌱 Muy fácil</button>
+                <button class="difficulty-btn" data-diff="2">😊 Fácil</button>
+                <button class="difficulty-btn" data-diff="3" class="active">⭐ Media</button>
+                <button class="difficulty-btn" data-diff="4">🔥 Difícil</button>
+                <button class="difficulty-btn" data-diff="5">🏆 Experto</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de lecciones -->
+    <div id="lessonsModal" class="modal">
+        <div class="modal-content glass-effect">
+            <div class="modal-header">
+                <h3>📚 LECCIONES DE AJEDREZ</h3>
+                <span class="close close-lessons">&times;</span>
+            </div>
+            <div id="lessonsList"></div>
+        </div>
+    </div>
+
+    <!-- Modal de prueba/quiz -->
+    <div id="quizModal" class="modal">
+        <div class="modal-content glass-effect">
+            <div class="modal-header">
+                <h3 id="quizTitle">Prueba</h3>
+                <span class="close close-quiz">&times;</span>
+            </div>
+            <div id="quizContent"></div>
+        </div>
+    </div>
+
+    <!-- Modal de reglas -->
+    <div id="rulesModal" class="modal">
+        <div class="modal-content glass-effect">
+            <div class="modal-header">
+                <h3>📖 Reglas del Ajedrez</h3>
+                <span class="close close-rules">&times;</span>
+            </div>
+            <h4>Movimiento de piezas</h4>
+            <ul>
+                <li><strong>Peón:</strong> 1 adelante, 2 en primero, come diagonal</li>
+                <li><strong>Torre:</strong> Horizontal y vertical</li>
+                <li><strong>Caballo:</strong> Movimiento en "L", salta piezas</li>
+                <li><strong>Alfil:</strong> Diagonal</li>
+                <li><strong>Reina:</strong> Horizontal, vertical y diagonal</li>
+                <li><strong>Rey:</strong> 1 casilla cualquier dirección</li>
+            </ul>
+            <h4>Reglas especiales</h4>
+            <ul>
+                <li><strong>Enroque:</strong> Rey + Torre sin mover</li>
+                <li><strong>Al paso:</strong> Captura especial de peón</li>
+                <li><strong>Promoción:</strong> Peón se convierte en dama al llegar al final</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Pantalla de juego -->
+    <div id="gameScreen" class="game-screen">
+        <div class="game-header">
+            <div class="game-header-left">
+                <button id="backToMenuBtn" class="icon-btn">←</button>
+                <div class="profile-mini" id="activeProfileBtn">
+                    <img src="img/perfil.png" alt="">
+                    <span id="activeProfileName">Invitado</span>
+                </div>
+            </div>
+            <h2>♜ AJEDREZ CRISTAL ♞</h2>
+            <button id="resignBtn" class="icon-btn resign-btn">🏳</button>
+        </div>
+
+        <div class="game-container">
+            <div class="board-wrapper">
+                <div id="board"></div>
+            </div>
+
+            <div class="info-panel glass-effect">
+                <div class="turn-box">
+                    <div class="turn-label">TURNO</div>
+                    <div class="turn-value" id="turn">Blancas</div>
+                    <div class="status-badge" id="status">Jugando</div>
+                </div>
+                <div class="stats-box">
+                    <div class="stat-row"><span>📊 Última:</span><span id="lastMove">-</span></div>
+                    <div class="stat-row"><span>🔢 Movimientos:</span><span id="moveCount">0</span></div>
+                </div>
+                <button id="flipBoardBtn" class="compact-btn">🔄 Voltear</button>
+                <div id="aiControls"><button id="aiMoveBtn" class="compact-btn">🤖 Forzar IA</button></div>
+            </div>
+
+            <div class="analysis-panel glass-effect">
+                <div class="analysis-title">📈 ANÁLISIS</div>
+                <div class="stats-grid">
+                    <div class="stat-card"><div class="value" id="masterMoves">0</div><div class="label">!! Maestras</div></div>
+                    <div class="stat-card"><div class="value" id="goodMoves">0</div><div class="label">! Buenas</div></div>
+                    <div class="stat-card"><div class="value" id="normalMoves">0</div><div class="label">• Regulares</div></div>
+                </div>
+                <div class="analysis-title" style="margin-top: 10px;">📋 Historial</div>
+                <div id="moveHistoryList" class="move-list"></div>
+                <button id="exportAnalysisBtn" class="export-btn">📎 Exportar PGN</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
